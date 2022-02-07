@@ -1,0 +1,28 @@
+spring:
+ application:
+  name: gateway-service
+ cloud:
+  gateway:
+   routes:
+    - id: movie-catalog-service
+      uri: lb://movie-catalog-service
+      predicates:
+      - Path=/catalog/**
+    - id: movie-info-service
+      uri: lb://movie-info-service
+      predicates:
+      - Path=/movies/**
+    - id: ratings-data-service
+      uri: lb://ratings-data-service
+      predicates:
+      - Path=/ratingsdata/**
+  discovery:
+   enabled: true
+server:
+ port: 8700
+eureka:
+ client:
+  eureka-server-port: 8761
+  
+
+
